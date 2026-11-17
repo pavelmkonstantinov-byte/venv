@@ -55,3 +55,14 @@ class LibraryCatalogManager:
             or book._unavailable_since >= cutoff
         ]
         return books_before - len(self._books)
+
+if __name__ == "__main__":
+    catalog = LibraryCatalogManager()
+    catalog.add_book_to_library("Мастер и Маргарита", "М. Булгаков", 1967)
+    catalog.add_book_to_library("Война и мир", "Л. Толстой", 1869)
+
+    catalog.borrow_book("Мастер и Маргарита")
+
+    for book in catalog.oldest_books(2):
+        status = "в наличии" if book.available else "выдана"
+        print(f"{book.title} ({book.year}) — {status}")
